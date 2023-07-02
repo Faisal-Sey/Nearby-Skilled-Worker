@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { Routes } from '../../interfaces/routes.interface';
-import { StripeController } from '@/controllers/stripe';
+import { StripeController } from '../../controllers/stripe';
 import bodyParser from 'body-parser';
 
 export class StripeRoutes implements Routes {

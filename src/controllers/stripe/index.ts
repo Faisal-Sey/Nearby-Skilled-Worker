@@ -1,9 +1,9 @@
-import { ApiResponse } from '@/utils/apiResponses';
+import { ApiResponse } from '../../utils/apiResponses';
 import { Request, Response } from 'express';
-import { logger } from '@/utils/logger';
+import { logger } from '../../utils/logger';
 import Stripe from 'stripe';
 import { Container } from 'typedi';
-import { UserService } from '@/services/users.service';
+import { UserService } from '../../services/users.service';
 
 export class StripeController {
   public responses = Container.get(ApiResponse);

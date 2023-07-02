@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import 'dotenv/config';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
