@@ -4,7 +4,6 @@ import { Service } from 'typedi';
 import { CreateUserDto, DeleteUserDto, UpdateUserDto, UpdateUserPasswordDto } from '../dtos/users.dto';
 import { HttpException } from '../exceptions/httpException';
 import { User } from '../interfaces/users/user/users.interface';
-import { exclude } from '../utils/helpers';
 
 @Service()
 export class UserService {
