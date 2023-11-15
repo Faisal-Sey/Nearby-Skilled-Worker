@@ -1,8 +1,8 @@
-import { IsString, IsNotEmpty, MinLength, MaxLength, IsEmail, IsUrl, IsAlpha, IsBoolean, IsInt } from 'class-validator';
+import { IsString, IsNotEmpty, MinLength, MaxLength, IsEmail, IsUrl, IsAlpha, IsInt } from 'class-validator';
 
 export class BaseUserDto {
   @IsString()
-  public username: string;
+  public email: string;
 
   @IsString()
   @IsNotEmpty()

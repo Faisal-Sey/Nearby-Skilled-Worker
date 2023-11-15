@@ -17,9 +17,8 @@ model admin {
 model user {
   id             String    @id @unique(map: "id_UNIQUE") @default(uuid())
   password       String    @db.VarChar(555)
-  username       String    @unique @db.VarChar(200)
   bio            String?   @db.LongText
-  email          String?   @db.VarChar(500)
+  email          String    @unique @db.VarChar(500)
   name           String    @db.VarChar(100)
   profilePicture String?   @db.VarChar(500)
   deleted        Int       @default(0) @db.TinyInt

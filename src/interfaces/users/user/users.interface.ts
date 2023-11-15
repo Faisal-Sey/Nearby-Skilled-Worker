@@ -1,9 +1,8 @@
 import { TokenData } from '../../../interfaces/users/common.interface';
 export interface UserExcludePassword {
   id: String;
-  username: string;
   name: string;
-  email?: string;
+  email: string;
   coverPicture?: string;
   profilePicture?: string;
   bio?: string;
@@ -16,6 +15,6 @@ export interface User extends UserExcludePassword {
 export interface UserWithToken extends UserExcludePassword, TokenData {}
 
 export interface UserLogin {
-  username: string;
+  email: string;
   password: string;
 }
