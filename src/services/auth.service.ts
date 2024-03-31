@@ -1,9 +1,9 @@
-import { LoginUserDto, CreateUserDto } from './../dtos/users.dto';
+import { LoginUserDto, CreateUserDto } from '@dtos/users.dto';
 import { PrismaClient } from '@prisma/client';
 import { compare, hash } from 'bcrypt';
 import { Service } from 'typedi';
-import { HttpException } from '../exceptions/httpException';
-import { User } from '../interfaces/users/user/users.interface';
+import { HttpException } from '@exceptions/httpException';
+import { User } from '@interfaces/users/user/users.interface';
 
 @Service()
 export class AuthService {

@@ -10,8 +10,7 @@ export class UserService {
   public user = new PrismaClient().user;
 
   public async findAllUser(): Promise<User[]> {
-    const allUser: User[] = await this.user.findMany({ where: { deleted: 0 } });
-    return allUser;
+    return this.user.findMany({ where: { deleted: 0 } });
   }
 
   public async findUserById(userId: string): Promise<User> {
@@ -29,12 +28,11 @@ export class UserService {
   }
 
   public async createUser(userData: CreateUserDto): Promise<User> {
-    const findUser: User = await this.user.findFirst({ where: { username: userData.username, deleted: 0 } });
-    if (findUser) throw new HttpException(409, `This username ${userData.username} already exists`);
+    const findUser: User = await this.user.findFirst({ where: { email: userData.email, deleted: 0 } });
+    if (findUser) throw new HttpException(409, `This username ${userData.email} already exists`);
 
     const hashedPassword = await hash(userData.password, 10);
-    const createUserData: User = await this.user.create({ data: { ...userData, password: hashedPassword } });
-    return createUserData;
+    return this.user.create({ data: { ...userData, password: hashedPassword } });
   }
 
   public async updatePassword(userId: string, userData: UpdateUserPasswordDto): Promise<User> {
@@ -42,8 +40,7 @@ export class UserService {
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
     const hashedPassword = await hash(userData.password, 10);
-    const updateUserData = await this.user.update({ where: { id: userId }, data: { ...userData, password: hashedPassword } });
-    return updateUserData;
+    return this.user.update({ where: { id: userId }, data: { ...userData, password: hashedPassword } });
   }
 
   // TODO!: Check how to make fields in UpdateUserDto optional
@@ -51,11 +48,10 @@ export class UserService {
     const findUser: User = await this.user.findUnique({ where: { id: userId } });
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
-    const updateUserData = await this.user.update({
+    return this.user.update({
       where: { id: userId },
       data: { ...userData },
     });
-    return updateUserData;
   }
 
   public async deleteUser(userId: string): Promise<User> {
@@ -63,8 +59,7 @@ export class UserService {
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
     const deleteStatus: DeleteUserDto = { deleted: 1 };
-    const deleteUserData = await this.user.update({ where: { id: userId }, data: { ...deleteStatus } });
-    return deleteUserData;
+    return this.user.update({ where: { id: userId }, data: { ...deleteStatus } });
   }
 
   public async restoreUser(userId: string): Promise<User> {
@@ -72,7 +67,6 @@ export class UserService {
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
     const deleteStatus: DeleteUserDto = { deleted: 0 };
-    const deleteUserData = await this.user.update({ where: { id: userId }, data: { ...deleteStatus } });
-    return deleteUserData;
+    return this.user.update({ where: { id: userId }, data: { ...deleteStatus } });
   }
 }
