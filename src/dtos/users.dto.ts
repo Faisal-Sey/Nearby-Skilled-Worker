@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, MinLength, MaxLength, IsEmail, IsUrl, IsAlpha, IsInt } from 'class-validator';
+import { IsString, IsNotEmpty, MinLength, MaxLength, IsEmail, IsUrl, IsAlpha, IsInt, Length, IsUUID } from 'class-validator';
 
 export class BaseUserDto {
   @IsString()
@@ -48,4 +48,31 @@ export class UpdateUserPasswordDto {
 export class DeleteUserDto {
   @IsInt()
   public deleted: number;
+}
+
+export class ResetPasswordDto {
+  @IsEmail()
+  public email: string;
+}
+
+export class DecodeTokenDto {
+  @IsString()
+  @IsNotEmpty()
+  public token: string;
+}
+
+export class ChangePasswordDto {
+  @IsUUID()
+  @IsNotEmpty()
+  public userId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @Length(8, 255, { message: 'Password must be at least 8 characters long' })
+  public password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @Length(8, 255, { message: 'Password must be at least 8 characters long' })
+  public confirmPassword: string;
 }

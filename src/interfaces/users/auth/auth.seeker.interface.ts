@@ -18,3 +18,8 @@ export interface ResetPassword {
   password: string;
   confirmPassword?: string;
 }
+
+export interface ResetPasswordTokenData {
+  userId: string;
+  email: string;
+}
